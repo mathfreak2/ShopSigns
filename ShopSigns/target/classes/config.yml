@@ -1,0 +1,86 @@
+sign-format:
+   buy:
+      - '%buy%'
+      - '%item%'
+      - '%quantity%'
+      - '%buy_price%'
+   sell:
+      - '%sell%'
+      - '%item%'
+      - '%quantity%'
+      - '%sell_price%'
+   buy-sell:
+      - '%buy_sell%'
+      - '%item%'
+      - '%quantity%'
+      - '%buy_sell_price%'
+   color: '&b'
+   keywords:
+      buy: '[buy]'
+      sell: '[sell]'
+      buy-sell: '[buy : sell]'
+      admin-shop: 'S'
+      private-shop: 'P'
+      buy-sell-price: '%buy_price% : %sell_price%'       
+
+# Keywords are referenced by surrounding the word with %s, so for example, the item
+# keyword will replace the string listed as '%item%'.
+
+# Keywords required for this plugin to work correctly include %buy_price%, 
+# %sell_price%, %buy%, %sell%, %buy_sell%, and %buy_sell_price%. If these keywords are not 
+# present, the default configuration will be restored.
+
+# The admin-shop and private-shop modifiers should be added before the buy and sell keywords,
+# so an admin buy shop will look like S[buy] by default whereas a private buy/sell shop will
+# look like P[buy : sell] by default
+
+# Optional keywords include %quantity% and %item%. If they are not present in the
+# sign format configuration, they will be implied upon connection to a shopchest
+# by taking the current contents of the chest and using them as the quantity and/or items
+# being sold at any given time
+
+confirms:
+   make-shopstick: '&aYou have made %number% ShopSticks'
+   make-shopsign: '&aYou have registered a ShopSign at &e%coords%&a.'
+   connect-chest: '&aYou have linked the shopsign located at &e%scoords% &awith the chest located at &e%ccoords%&a.'
+   shopsign-stored: '&aShopSign located at &e%scoords% &astored.'
+   shopchest-stored: '&aContainer located at &e%ccoords% &astored.'
+   shopsign-destroyed: '&cYou have unregistered the ShopSign located at &e%scoords%&c.'
+   shopchest-destroyed: '&cYou have disconnected the chest associated with the ShopSign at &e%scoords%&c.'
+   buy-success: '&aYou bought &e%quantity% %item%&a.'
+   sell-success: '&aYou sold &e%quantity% %item%&a.'
+   add-permission-success: '&aYou have added &e%user% &ato this shop!'
+   remove-permission-success: '&cYou have removed &e%user% &cfrom this shop.'
+
+errors:
+   shopsign-already-connected: '&cThis sign is already connected to a chest. You must either break the chest or this sign to disconnect it.'
+   shopchest-already-connected: '&cThis chest is already connected to a sign. You must either break this chest or the sign to disconnect it.'
+   shopsign-not-yours: '&cThis shop sign is not yours!'
+   shopsign-no-buy: '&cYou may not buy from that shop.'
+   shopsign-no-sell: '&cYou may not sell to that shop.'
+   shopsign-no-buy-permission: '&cYou do not have permission to buy from this shop.'
+   shopsign-no-sell-permission: '&cYou do not have permission to sell to this shop.'
+   add-permission-failure: '&cThat person already has permission to this shop.'
+   remove-permission-failure: '&cThat person does not already have permission to this shop.'
+   buy-no-money: '&cYou do not have enough money.'
+   buy-no-inventory-chest: '&cThis shop is empty!'
+   buy-no-inventory: '&cYour inventory is full.'
+   sell-no-inventory: '&cYou do not have enough of the item being sold.'
+   sell-no-inventory-chest: '&cThis shop is full!'
+   sell-no-money: '&cThe shop owner does not have enough money.' 
+   shopsign-not-connected: '&cThis shop sign is not connected to a chest.'
+   too-much-money: '&cThat transaction could not go through because one party has too much money.'
+   ambiguous-item: '&cNo item was specified, so you could not link the chest to the shop sign.'
+   ambiguous-quantity: '&cNo quantity was specified, so you could not link the chest to the shop sign.'      
+   
+# feedback.progress-bar-delay is the number of server ticks it lasts. So, 100 ticks -> 100/20 = 5 seconds.   
+   
+feedback:
+   shop-bought-from: '&e%user% &abought &e%quantity% %item%&a from your shop at &e%scoords%&a.'
+   shop-sell-to: '&e%user% &asold &e%quantity% %item%&a to your shop at %scoords%&a.'
+   mail-owner-shop-empty: true
+   mail-owner-shop-full: true
+   mail-message-owner-shop-empty: '&c[ShopSigns] &eYour chest at &c%ccoords% &elinked to the shop at &c%scoords% &eis empty.'
+   mail-message-owner-shop-full: '&c[ShopSigns] &eYour chest at &c%ccoords% &elinked to the shop at &c%scoords% &eis full.'
+   show-progress-bars: true
+   progress-bar-delay: 100

@@ -1,0 +1,39 @@
+main: cat.math.shopsigns.ShopSigns
+name: ShopSigns
+version: 1.0
+author: Rowan McKee
+api-version: 1.14
+
+depend: [Essentials, Vault]
+
+commands:
+   shop:
+   buy:
+   sell:
+   shopsigns:
+
+permissions:
+   shopsigns.*:
+      default: op
+   shopsigns.bypass-privacy:
+      default: op
+   shopsigns.break.other:
+      default: op
+   shopsigns.shop:
+      default: true
+   shopsigns.buy-command:
+      default: true
+   shopsigns.sell-command:
+      default: true
+   shopsigns.admin:
+      default: op
+   shopsigns.makeshop:
+      default: true
+   shopsigns.buy:
+      default: true
+   shopsigns.sell:
+      default: true
+   shopsigns.adminshop-buy:
+      default: true
+   shopsigns.adminshop-sell:
+      default: true   

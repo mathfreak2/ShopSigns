@@ -228,7 +228,6 @@ public class ShopSignCreator implements Listener {
 			
 			// If the syntax of the configured sign format does not match, then do not make this a sign shop
 			if(!buy_sell.substring(0,b).equals(buy_sell_price.substring(0,b))) {
-				Bukkit.getServer().broadcastMessage(buy_sell.substring(0,b) + " : " + buy_sell_price.substring(0,b));
 				return;
 			}
 			
@@ -237,7 +236,7 @@ public class ShopSignCreator implements Listener {
 			// Measure the length of the number
 			int i = 0;
 			
-			while(p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
+			while(p1.charAt(i) == '0' || p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
 					p1.charAt(i) == '4' || p1.charAt(i) == '5' || p1.charAt(i) == '6' ||
 					p1.charAt(i) == '7' || p1.charAt(i) == '8' || p1.charAt(i) == '9' ||
 					p1.charAt(i) == '.') {i++;}
@@ -251,7 +250,6 @@ public class ShopSignCreator implements Listener {
 			// If the syntax of the configured sign format between the %buy_price% and %sell_price% does not match, then
 			// do not make this a sign shop
 			if(!p1.substring(0,in_between.length()).equals(in_between)) {
-				Bukkit.getServer().broadcastMessage(p1.substring(0,in_between.length()) + " : " + in_between);
 				return;
 			}
 			
@@ -260,7 +258,7 @@ public class ShopSignCreator implements Listener {
 			// Determine the length of the number
 			i = 0;
 			
-			while(p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
+			while(p1.charAt(i) == '0' || p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
 					p1.charAt(i) == '4' || p1.charAt(i) == '5' || p1.charAt(i) == '6' ||
 					p1.charAt(i) == '7' || p1.charAt(i) == '8' || p1.charAt(i) == '9' ||
 					p1.charAt(i) == '.') {i++; if(i==p1.length()) break;}
@@ -272,7 +270,6 @@ public class ShopSignCreator implements Listener {
 			
 			// If the configured format does not match the rest of the line, do not make this a sign shop
 			if(!p1.equals(p2)) {
-				Bukkit.getServer().broadcastMessage(p1 + " : " + p2);
 				return;
 			}
 		}
@@ -282,7 +279,6 @@ public class ShopSignCreator implements Listener {
 			
 			// If the syntax of the configured sign format does not match, then do not make this a sign shop
 			if(!buy_sell.substring(0,b).equals(buy_sell_price.substring(0,b))) {
-				Bukkit.getServer().broadcastMessage(buy_sell.substring(0,b) + " : " + buy_sell_price.substring(0,b));
 				return;
 			}
 			
@@ -291,7 +287,7 @@ public class ShopSignCreator implements Listener {
 			// Measure the length of the number
 			int i = 0;
 			
-			while(p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
+			while(p1.charAt(i) == '0' || p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
 					p1.charAt(i) == '4' || p1.charAt(i) == '5' || p1.charAt(i) == '6' ||
 					p1.charAt(i) == '7' || p1.charAt(i) == '8' || p1.charAt(i) == '9' ||
 					p1.charAt(i) == '.') {i++;}
@@ -305,7 +301,6 @@ public class ShopSignCreator implements Listener {
 			// If the syntax of the configured sign format between the %buy_price% and %sell_price% does not match, then
 			// do not make this a sign shop
 			if(!p1.substring(0,in_between.length()).equals(in_between)) {
-				Bukkit.getServer().broadcastMessage(p1.substring(0,in_between.length()) + " : " + in_between);
 				return;
 			}
 			
@@ -314,7 +309,7 @@ public class ShopSignCreator implements Listener {
 			// Determine the length of the number
 			i = 0;
 			
-			while(p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
+			while(p1.charAt(i) == '0' || p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
 					p1.charAt(i) == '4' || p1.charAt(i) == '5' || p1.charAt(i) == '6' ||
 					p1.charAt(i) == '7' || p1.charAt(i) == '8' || p1.charAt(i) == '9' ||
 					p1.charAt(i) == '.') {i++; if(i==p1.length()) break;}
@@ -326,7 +321,6 @@ public class ShopSignCreator implements Listener {
 			
 			// If the configured format does not match the rest of the line, do not make this a sign shop
 			if(!p1.equals(p2)) {
-				Bukkit.getServer().broadcastMessage(p1 + " : " + p2);
 				return;
 			}
 		}
@@ -626,7 +620,6 @@ public class ShopSignCreator implements Listener {
 			
 			// If the syntax of the configured sign format does not match, then do not make this a sign shop
 			if(!buy_sell.substring(0,b).equals(buy_sell_price.substring(0,b))) {
-				Bukkit.getServer().broadcastMessage(buy_sell.substring(0,b) + " : " + buy_sell_price.substring(0,b));
 				return;
 			}
 			
@@ -635,7 +628,7 @@ public class ShopSignCreator implements Listener {
 			// Measure the length of the number
 			int i = 0;
 			
-			while(p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
+			while(p1.charAt(i) == '0' || p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
 					p1.charAt(i) == '4' || p1.charAt(i) == '5' || p1.charAt(i) == '6' ||
 					p1.charAt(i) == '7' || p1.charAt(i) == '8' || p1.charAt(i) == '9' ||
 					p1.charAt(i) == '.') {i++;}
@@ -649,7 +642,6 @@ public class ShopSignCreator implements Listener {
 			// If the syntax of the configured sign format between the %buy_price% and %sell_price% does not match, then
 			// do not make this a sign shop
 			if(!p1.substring(0,in_between.length()).equals(in_between)) {
-				Bukkit.getServer().broadcastMessage(p1.substring(0,in_between.length()) + " : " + in_between);
 				return;
 			}
 			
@@ -658,7 +650,7 @@ public class ShopSignCreator implements Listener {
 			// Determine the length of the number
 			i = 0;
 			
-			while(p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
+			while(p1.charAt(i) == '0' || p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
 					p1.charAt(i) == '4' || p1.charAt(i) == '5' || p1.charAt(i) == '6' ||
 					p1.charAt(i) == '7' || p1.charAt(i) == '8' || p1.charAt(i) == '9' ||
 					p1.charAt(i) == '.') {i++; if(i==p1.length()) break;}
@@ -670,7 +662,6 @@ public class ShopSignCreator implements Listener {
 			
 			// If the configured format does not match the rest of the line, do not make this a sign shop
 			if(!p1.equals(p2)) {
-				Bukkit.getServer().broadcastMessage(p1 + " : " + p2);
 				return;
 			}
 		}
@@ -680,7 +671,6 @@ public class ShopSignCreator implements Listener {
 			
 			// If the syntax of the configured sign format does not match, then do not make this a sign shop
 			if(!buy_sell.substring(0,b).equals(buy_sell_price.substring(0,b))) {
-				Bukkit.getServer().broadcastMessage(buy_sell.substring(0,b) + " : " + buy_sell_price.substring(0,b));
 				return;
 			}
 			
@@ -689,7 +679,7 @@ public class ShopSignCreator implements Listener {
 			// Measure the length of the number
 			int i = 0;
 			
-			while(p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
+			while(p1.charAt(i) == '0' || p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
 					p1.charAt(i) == '4' || p1.charAt(i) == '5' || p1.charAt(i) == '6' ||
 					p1.charAt(i) == '7' || p1.charAt(i) == '8' || p1.charAt(i) == '9' ||
 					p1.charAt(i) == '.') {i++;}
@@ -703,7 +693,6 @@ public class ShopSignCreator implements Listener {
 			// If the syntax of the configured sign format between the %buy_price% and %sell_price% does not match, then
 			// do not make this a sign shop
 			if(!p1.substring(0,in_between.length()).equals(in_between)) {
-				Bukkit.getServer().broadcastMessage(p1.substring(0,in_between.length()) + " : " + in_between);
 				return;
 			}
 			
@@ -712,7 +701,7 @@ public class ShopSignCreator implements Listener {
 			// Determine the length of the number
 			i = 0;
 			
-			while(p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
+			while(p1.charAt(i) == '0' || p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
 					p1.charAt(i) == '4' || p1.charAt(i) == '5' || p1.charAt(i) == '6' ||
 					p1.charAt(i) == '7' || p1.charAt(i) == '8' || p1.charAt(i) == '9' ||
 					p1.charAt(i) == '.') {i++; if(i==p1.length()) break;}
@@ -724,7 +713,6 @@ public class ShopSignCreator implements Listener {
 			
 			// If the configured format does not match the rest of the line, do not make this a sign shop
 			if(!p1.equals(p2)) {
-				Bukkit.getServer().broadcastMessage(p1 + " : " + p2);
 				return;
 			}
 		}
@@ -1209,7 +1197,6 @@ public class ShopSignCreator implements Listener {
 			
 			// If the syntax of the configured sign format does not match, then do not make this a sign shop
 			if(!buy_sell.substring(0,b).equals(buy_sell_price.substring(0,b))) {
-				Bukkit.getServer().broadcastMessage(buy_sell.substring(0,b) + " : " + buy_sell_price.substring(0,b));
 				return;
 			}
 			
@@ -1218,7 +1205,7 @@ public class ShopSignCreator implements Listener {
 			// Measure the length of the number
 			int i = 0;
 			
-			while(p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
+			while(p1.charAt(i) == '0' || p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
 					p1.charAt(i) == '4' || p1.charAt(i) == '5' || p1.charAt(i) == '6' ||
 					p1.charAt(i) == '7' || p1.charAt(i) == '8' || p1.charAt(i) == '9' ||
 					p1.charAt(i) == '.') {i++;}
@@ -1232,7 +1219,6 @@ public class ShopSignCreator implements Listener {
 			// If the syntax of the configured sign format between the %buy_price% and %sell_price% does not match, then
 			// do not make this a sign shop
 			if(!p1.substring(0,in_between.length()).equals(in_between)) {
-				Bukkit.getServer().broadcastMessage(p1.substring(0,in_between.length()) + " : " + in_between);
 				return;
 			}
 			
@@ -1241,7 +1227,7 @@ public class ShopSignCreator implements Listener {
 			// Determine the length of the number
 			i = 0;
 			
-			while(p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
+			while(p1.charAt(i) == '0' || p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
 					p1.charAt(i) == '4' || p1.charAt(i) == '5' || p1.charAt(i) == '6' ||
 					p1.charAt(i) == '7' || p1.charAt(i) == '8' || p1.charAt(i) == '9' ||
 					p1.charAt(i) == '.') {i++; if(i==p1.length()) break;}
@@ -1253,7 +1239,6 @@ public class ShopSignCreator implements Listener {
 			
 			// If the configured format does not match the rest of the line, do not make this a sign shop
 			if(!p1.equals(p2)) {
-				Bukkit.getServer().broadcastMessage(p1 + " : " + p2);
 				return;
 			}
 		}
@@ -1263,7 +1248,6 @@ public class ShopSignCreator implements Listener {
 			
 			// If the syntax of the configured sign format does not match, then do not make this a sign shop
 			if(!buy_sell.substring(0,b).equals(buy_sell_price.substring(0,b))) {
-				Bukkit.getServer().broadcastMessage(buy_sell.substring(0,b) + " : " + buy_sell_price.substring(0,b));
 				return;
 			}
 			
@@ -1272,7 +1256,7 @@ public class ShopSignCreator implements Listener {
 			// Measure the length of the number
 			int i = 0;
 			
-			while(p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
+			while(p1.charAt(i) == '0' || p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
 					p1.charAt(i) == '4' || p1.charAt(i) == '5' || p1.charAt(i) == '6' ||
 					p1.charAt(i) == '7' || p1.charAt(i) == '8' || p1.charAt(i) == '9' ||
 					p1.charAt(i) == '.') {i++;}
@@ -1285,8 +1269,7 @@ public class ShopSignCreator implements Listener {
 			
 			// If the syntax of the configured sign format between the %buy_price% and %sell_price% does not match, then
 			// do not make this a sign shop
-			if(!p1.substring(0,in_between.length()).equals(in_between)) {
-				Bukkit.getServer().broadcastMessage(p1.substring(0,in_between.length()) + " : " + in_between);
+			if(!p1.substring(0,in_between.length()).equals(in_between)) {	
 				return;
 			}
 			
@@ -1295,7 +1278,7 @@ public class ShopSignCreator implements Listener {
 			// Determine the length of the number
 			i = 0;
 			
-			while(p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
+			while(p1.charAt(i) == '0' || p1.charAt(i) == '1' || p1.charAt(i) == '2' || p1.charAt(i) == '3' ||
 					p1.charAt(i) == '4' || p1.charAt(i) == '5' || p1.charAt(i) == '6' ||
 					p1.charAt(i) == '7' || p1.charAt(i) == '8' || p1.charAt(i) == '9' ||
 					p1.charAt(i) == '.') {i++; if(i==p1.length()) break;}
@@ -1307,7 +1290,6 @@ public class ShopSignCreator implements Listener {
 			
 			// If the configured format does not match the rest of the line, do not make this a sign shop
 			if(!p1.equals(p2)) {
-				Bukkit.getServer().broadcastMessage(p1 + " : " + p2);
 				return;
 			}
 		}

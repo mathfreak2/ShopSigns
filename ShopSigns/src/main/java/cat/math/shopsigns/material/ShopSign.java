@@ -152,7 +152,7 @@ public class ShopSign {
 		}
 		
 		// You can't buy from your own shop, and also if this shop is not a buy sign
-		if(buyer.getBase().getUniqueId().toString().equals(sso.getPlayer().getUniqueId().toString()) || type == 1 || type == 4 || type == 7) {
+		if(buyer.getBase().getUniqueId().toString().equals(sso.getPlayer().getUniqueId().toString()) || buy_price == -1) {
 			
 			String s = plugin.getConfig().getString("errors.sign-no-buy","&cYou may not buy from that shop.");
 			s = Util.color(s);
@@ -281,7 +281,7 @@ public class ShopSign {
 		}
 		
 		// You can't sell to your own shop and also if this sign is not a sell sign
-		if(seller.getBase().getUniqueId().toString().equals(sso.getPlayer().getUniqueId().toString()) || type == 0 || type == 3 || type == 6) {
+		if(seller.getBase().getUniqueId().toString().equals(sso.getPlayer().getUniqueId().toString()) || sell_price == -1) {
 			
 			String s = plugin.getConfig().getString("errors.sign-no-sell","&cYou may not sell to that shop.");
 			s = Util.color(s);
@@ -332,7 +332,7 @@ public class ShopSign {
 		}
 		
 		try {
-			seller.giveMoney(new BigDecimal(buy_price));
+			seller.giveMoney(new BigDecimal(sell_price));
 		} catch (Exception e) {
 			String s = plugin.getConfig().getString("errors.too-much-money", "&cThat transaction could not go through because one party has too much money.");
 			s = Util.color(s);
@@ -342,7 +342,7 @@ public class ShopSign {
 		
 		// Takes the items from the seller's inventory and places them into the chest's inventory and also do the work for the money transaction
 		sc.addToChest(quantity);
-		owner.takeMoney(new BigDecimal(buy_price));
+		owner.takeMoney(new BigDecimal(sell_price));
 		inv = seller.getBase().getInventory();
 		
 		ArrayList<ItemStack> additems = new ArrayList<ItemStack>();

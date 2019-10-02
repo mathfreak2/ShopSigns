@@ -38,7 +38,7 @@ public class PlayerInteraction implements Listener {
 		Action action = event.getAction();
 		
 		// If nothing was clicked on, do not proceed
-		if(event.getClickedBlock().isEmpty()) return;
+		if(event.getClickedBlock() == null || event.getClickedBlock().isEmpty()) return;
 		
 		switch(action) {
 		

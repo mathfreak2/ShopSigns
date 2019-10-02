@@ -95,6 +95,7 @@ public class ShopChest {
 		for(int i=contents.length-1;i>=0;i--) {
 			
 			ItemStack is = contents[i];
+			if(is == null) continue;
 			if(is.getType().equals(ss.getItem())) {
 				
 				if(amount > is.getAmount()) {

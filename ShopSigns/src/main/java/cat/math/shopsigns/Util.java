@@ -1,7 +1,10 @@
 package cat.math.shopsigns;
 
 import java.io.File;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -149,8 +152,30 @@ public static FileConfiguration getShopFromChest(Block b) {
 	
 	public static Material parseItem(String s) {
 		
-		s = s.replace(" ", "_");
-		s = s.toUpperCase();
-		return Material.getMaterial(s);
+		if(stringToInt(s) == -1) {
+			s = s.replace(" ", "_");
+			s = s.toUpperCase();
+			return Material.getMaterial(s);
+		}
+		
+		else {
+			
+			int x = stringToInt(s);
+			Material[] values = Material.values();
+			if(x >= values.length) return null; 
+			else return values[x];
+		}
+	}
+	
+	public static OfflinePlayer searchForPlayer(String name) {
+		
+		OfflinePlayer[] players = Bukkit.getServer().getOfflinePlayers();
+		
+		for(OfflinePlayer p : players) {
+			String n = p.getName();
+			if(n.equalsIgnoreCase(name)) return p;
+		}
+		
+		return null;
 	}
 }

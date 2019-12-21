@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -62,7 +63,7 @@ public class PrivateShop extends ShopSign {
 				player.hasPermission("shopsigns.bypass-privacy"));
 	}
 	
-	public void addPlayer(Player player) {
+	public void addPlayer(OfflinePlayer player) {
 		
 		if(allowedPlayers.contains(player.getUniqueId().toString())) {
 			
@@ -88,7 +89,7 @@ public class PrivateShop extends ShopSign {
 		return;
 	}
 	
-	public void removePlayer(Player player) {
+	public void removePlayer(OfflinePlayer player) {
 		
 		if(!allowedPlayers.contains(player.getUniqueId().toString())) {
 			

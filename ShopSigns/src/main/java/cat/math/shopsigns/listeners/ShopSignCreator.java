@@ -355,12 +355,10 @@ public class ShopSignCreator implements Listener {
 		if(mat != null) ss.setItem(mat);
 		if(q != -1) ss.setQuantity(q);
 		
-		for(int i=0; i<4; i++) {
-			String line = event.getLine(i);
-			line = plugin.getConfig().getString("sign-format.color") + line;
-			line = Util.color(line);
-			event.setLine(i, line);
-		}
+		String line = event.getLine(0);
+		line = plugin.getConfig().getString("sign-format.color") + line;
+		line = Util.color(line);
+		event.setLine(0, line);
 		
 		ss.register();
 		
@@ -450,12 +448,10 @@ public class ShopSignCreator implements Listener {
 		if(mat != null) ss.setItem(mat);
 		if(q != -1) ss.setQuantity(q);
 		
-		for(int i=0; i<4; i++) {
-			String line = event.getLine(i);
-			line = plugin.getConfig().getString("sign-format.color") + line;
-			line = Util.color(line);
-			event.setLine(i, line);
-		}
+		String line = event.getLine(0);
+		line = plugin.getConfig().getString("sign-format.color") + line;
+		line = Util.color(line);
+		event.setLine(0, line);
 		
 		ss.register();
 		
@@ -546,12 +542,10 @@ public class ShopSignCreator implements Listener {
 		if(q != -1) ss.setQuantity(q);
 		
 		// Change the color of the sign to let the user know they have set it up properly
-		for(int i=0; i<4; i++) {
-			String line = event.getLine(i);
-			line = plugin.getConfig().getString("sign-format.color", "&b") + line;
-			line = Util.color(line);
-			event.setLine(i, line);
-		}
+		String line = event.getLine(0);
+		line = plugin.getConfig().getString("sign-format.color") + line;
+		line = Util.color(line);
+		event.setLine(0, line);
 		
 		ss.register();
 		
@@ -747,12 +741,10 @@ public class ShopSignCreator implements Listener {
 		if(mat != null) ss.setItem(mat);
 		if(q != -1) ss.setQuantity(q);
 		
-		for(int i=0; i<4; i++) {
-			String line = event.getLine(i);
-			line = plugin.getConfig().getString("sign-format.color") + line;
-			line = Util.color(line);
-			event.setLine(i, line);
-		}
+		String line = event.getLine(0);
+		line = plugin.getConfig().getString("sign-format.color") + line;
+		line = Util.color(line);
+		event.setLine(0, line);
 		
 		ss.register();
 		
@@ -842,12 +834,10 @@ public class ShopSignCreator implements Listener {
 		if(mat != null) ss.setItem(mat);
 		if(q != -1) ss.setQuantity(q);
 		
-		for(int i=0; i<4; i++) {
-			String line = event.getLine(i);
-			line = plugin.getConfig().getString("sign-format.color") + line;
-			line = Util.color(line);
-			event.setLine(i, line);
-		}
+		String line = event.getLine(0);
+		line = plugin.getConfig().getString("sign-format.color") + line;
+		line = Util.color(line);
+		event.setLine(0, line);
 		
 		ss.register();
 		
@@ -938,12 +928,10 @@ public class ShopSignCreator implements Listener {
 		if(q != -1) ss.setQuantity(q);
 		
 		// Change the color of the sign to let the user know they have set it up properly
-		for(int i=0; i<4; i++) {
-			String line = event.getLine(i);
-			line = plugin.getConfig().getString("sign-format.color", "&b") + line;
-			line = Util.color(line);
-			event.setLine(i, line);
-		}
+		String line = event.getLine(0);
+		line = plugin.getConfig().getString("sign-format.color") + line;
+		line = Util.color(line);
+		event.setLine(0, line);
 		
 		ss.register();
 	}
@@ -1032,12 +1020,10 @@ public class ShopSignCreator implements Listener {
 		if(q != -1) ss.setQuantity(q);
 		
 		// Change the color of the sign to let the user know they have set it up properly
-		for(int i=0; i<4; i++) {
-			String line = event.getLine(i);
-			line = plugin.getConfig().getString("sign-format.color") + line;
-			line = Util.color(line);
-			event.setLine(i, line);
-		}
+		String line = event.getLine(0);
+		line = plugin.getConfig().getString("sign-format.color") + line;
+		line = Util.color(line);
+		event.setLine(0, line);
 		
 		ss.register();
 	}
@@ -1125,12 +1111,10 @@ public class ShopSignCreator implements Listener {
 		if(mat != null) ss.setItem(mat);
 		if(q != -1) ss.setQuantity(q);
 		
-		for(int i=0; i<4; i++) {
-			String line = event.getLine(i);
-			line = plugin.getConfig().getString("sign-format.color") + line;
-			line = Util.color(line);
-			event.setLine(i, line);
-		}
+		String line = event.getLine(0);
+		line = plugin.getConfig().getString("sign-format.color") + line;
+		line = Util.color(line);
+		event.setLine(0, line);
 		
 		ss.register();
 	}
@@ -1324,12 +1308,10 @@ public class ShopSignCreator implements Listener {
 		if(mat != null) ss.setItem(mat);
 		if(q != -1) ss.setQuantity(q);
 		
-		for(int i=0; i<4; i++) {
-			String line = event.getLine(i);
-			line = plugin.getConfig().getString("sign-format.color") + line;
-			line = Util.color(line);
-			event.setLine(i, line);
-		}
+		String line = event.getLine(0);
+		line = plugin.getConfig().getString("sign-format.color") + line;
+		line = Util.color(line);
+		event.setLine(0, line);
 		
 		ss.register();
 	}

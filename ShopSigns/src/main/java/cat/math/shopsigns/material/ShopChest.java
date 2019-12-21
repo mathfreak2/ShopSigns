@@ -1,10 +1,14 @@
 package cat.math.shopsigns.material;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import cat.math.shopsigns.Util;
+
 import org.bukkit.block.Container;
 
 public class ShopChest {
@@ -91,25 +95,33 @@ public class ShopChest {
 		
 		Inventory inv = getInventory();
 		ItemStack[] contents = inv.getContents();
+		Material mat = ss.getItem();
+		ItemStack removing = new ItemStack(mat);
+		removing.setItemMeta(ss.getMeta());
 		
-		for(int i=contents.length-1;i>=0;i--) {
+		for(int i=0; i<contents.length; i++) {
 			
 			ItemStack is = contents[i];
+			
 			if(is == null) continue;
-			if(is.getType().equals(ss.getItem())) {
+			
+			if(!is.isSimilar(removing)) continue;
+			
+			if(amount >= is.getAmount()) {
 				
-				if(amount > is.getAmount()) {
-					amount = amount - is.getAmount();
-					is.setAmount(0);
-				}
-				
-				else {
-					
-					int a = is.getAmount()-amount;
-					is.setAmount(a);
-					break;
-				}
+				amount -= is.getAmount();
+				is = null;
+				contents[i] = is;
 			}
+			
+			else {
+				
+				is.setAmount(is.getAmount()-amount);
+				amount = 0;
+				contents[i] = is;
+				break;
+			}
+			
 		}
 		
 		inv.setContents(contents);
@@ -120,47 +132,54 @@ public class ShopChest {
 		Inventory inv = getInventory();
 		ItemStack[] contents = inv.getContents();
 		Material item = ss.getItem();
-		int index = 0;
+		ItemStack adding = new ItemStack(ss.getItem());
+		adding.setItemMeta(ss.getMeta());
 		
-		for(ItemStack is : contents) {
-			if(is == null) {				
-				if(amount > item.getMaxStackSize()) {
+		for(int i=0; i<contents.length; i++) {
+			
+			ItemStack is = contents[i];
+			
+			if(is == null) {
+				
+				if(amount > adding.getMaxStackSize()) {
 					
-					is = new ItemStack(item, item.getMaxStackSize());
-					contents[index] = is;
-					amount = amount - item.getMaxStackSize();
+					is = new ItemStack(ss.getItem(), adding.getMaxStackSize());
+					is.setItemMeta(ss.getMeta());
+					amount -= adding.getMaxStackSize();
+					contents[i] = is;
 					continue;
 				}
 				
 				else {
 					
-					is = new ItemStack(item, amount);
-					contents[index] = is;
+					is = new ItemStack(ss.getItem(), amount);
+					is.setItemMeta(ss.getMeta());
+					amount = 0;
+					contents[i] = is;
 					break;
 				}
 			}
 			
-			if(is.getType().equals(item)) {
+			if(!is.isSimilar(adding)) continue;
+			
+			if(is.getAmount() == adding.getMaxStackSize()) continue;
+			
+			int space = adding.getMaxStackSize() - is.getAmount();
+			
+			if(amount > space) {
 				
-				if(is.getAmount() == is.getMaxStackSize()) continue;
-				
-				if(amount > item.getMaxStackSize()-is.getAmount()) {
-					
-					int space = item.getMaxStackSize()-is.getAmount();
-					is = new ItemStack(item, item.getMaxStackSize());
-					contents[index] = is;
-					amount = amount - space;
-					continue;
-				}
-				
-				else {
-					
-					is = new ItemStack(item, is.getAmount()+amount);
-					contents[index] = is;
-					break;
-				}
+				is.setAmount(adding.getMaxStackSize());
+				amount -= space;
+				contents[i] = is;
 			}
-			index++;
+			
+			else  {
+				
+				is.setAmount(is.getAmount() + amount);
+				amount = 0;
+				contents[i] = is;
+				break;
+			}
 		}
 		
 		inv.setContents(contents);

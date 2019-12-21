@@ -4,16 +4,18 @@ import java.io.File;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.earth2me.essentials.Essentials;
 
+import cat.math.shopsigns.commands.Find;
 import cat.math.shopsigns.commands.Shop;
 import cat.math.shopsigns.listeners.PlayerInteraction;
-import cat.math.shopsigns.listeners.Preprocessor;
 import cat.math.shopsigns.listeners.ShopSignCreator;
 import cat.math.shopsigns.listeners.ShopStickCreator;
 
@@ -69,7 +71,6 @@ public class ShopSigns extends JavaPlugin {
 		
 		PluginManager pm = Bukkit.getServer().getPluginManager();
 		pm.registerEvents(new ShopStickCreator(this), this);
-		pm.registerEvents(new Preprocessor(this),this);
 		pm.registerEvents(new PlayerInteraction(this), this);
 		pm.registerEvents(new ShopSignCreator(this), this);
 	}
@@ -78,6 +79,7 @@ public class ShopSigns extends JavaPlugin {
 		
 		this.getCommand("shop").setExecutor(new Shop(this));
 		this.getCommand("shopsigns").setExecutor(new cat.math.shopsigns.commands.ShopSigns(this));
+		this.getCommand("find").setExecutor(new Find(this));
 	}
 	
 	private void prepareDataSpace() {
@@ -90,6 +92,17 @@ public class ShopSigns extends JavaPlugin {
 			File shopowners = new File(directory, "Users");
 			if(!shopowners.exists()) shopowners.mkdir();
 			users = shopowners;
+			
+			File material_ids = new File(directory, "material-ids.yml");
+			if(!material_ids.exists()) material_ids.createNewFile();
+			FileConfiguration mats = YamlConfiguration.loadConfiguration(material_ids);
+			mats.set("README", "Do not change any of these values.");
+			Material[] list = Material.values();
+			for(int i=0; i<list.length; i++) {
+				mats.set(list[i].toString(), i);
+			}
+			
+			mats.save(material_ids);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

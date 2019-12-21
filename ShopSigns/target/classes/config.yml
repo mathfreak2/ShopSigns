@@ -71,7 +71,8 @@ errors:
    shopsign-not-connected: '&cThis shop sign is not connected to a chest.'
    too-much-money: '&cThat transaction could not go through because one party has too much money.'
    ambiguous-item: '&cNo item was specified, so you could not link the chest to the shop sign.'
-   ambiguous-quantity: '&cNo quantity was specified, so you could not link the chest to the shop sign.'      
+   ambiguous-quantity: '&cNo quantity was specified, so you could not link the chest to the shop sign.'
+   material-not-recognized: '&cUnknown material. Maybe you spelled something wrong?'     
    
 # feedback.progress-bar-delay is the number of server ticks it lasts. So, 100 ticks -> 100/20 = 5 seconds.   
    
@@ -80,7 +81,7 @@ feedback:
    shop-sell-to: '&e%user% &asold &e%quantity% %item%&a to your shop at %scoords%&a.'
    mail-owner-shop-empty: true
    mail-owner-shop-full: true
-   mail-message-owner-shop-empty: '&c[ShopSigns] &eYour chest at &c%ccoords% &elinked to the shop at &c%scoords% &eis empty.'
-   mail-message-owner-shop-full: '&c[ShopSigns] &eYour chest at &c%ccoords% &elinked to the shop at &c%scoords% &eis full.'
+   mail-message-owner-shop-empty: '&c[ShopSigns] &eYour &c%item%&e chest at &c%ccoords% &elinked to the shop at &c%scoords% &eis empty.'
+   mail-message-owner-shop-full: '&c[ShopSigns] &eYour &c%item%&e chest at &c%ccoords% &elinked to the shop at &c%scoords% &eis full.'
    show-progress-bars: true
    progress-bar-delay: 100

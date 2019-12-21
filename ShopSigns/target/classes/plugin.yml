@@ -8,9 +8,21 @@ depend: [Essentials, Vault]
 
 commands:
    shop:
-   buy:
-   sell:
+      description: Configure shop details
+      usage: /shop
+      permission: shopsigns.shop
+      permission-message: You do not have permission.
    shopsigns:
+      description: Admin commands
+      usage: /shopsigns [options]
+      permission: shopsigns.admin
+      permission-message: You do not have permission.
+   find:
+      description: Find buy or sell signs.
+      usage: /find [buy|sell] [item] <player>
+      aliases: [findshop, fs]
+      permission: shopsigns.find
+      permission-message: You do not have permission.
 
 permissions:
    shopsigns.*:
@@ -21,9 +33,7 @@ permissions:
       default: op
    shopsigns.shop:
       default: true
-   shopsigns.buy-command:
-      default: true
-   shopsigns.sell-command:
+   shopsigns.find:
       default: true
    shopsigns.admin:
       default: op

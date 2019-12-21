@@ -21,6 +21,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
 import com.earth2me.essentials.User;
 import cat.math.shopsigns.ShopSignOwner;
 import cat.math.shopsigns.ShopSigns;
@@ -38,6 +40,7 @@ public class ShopSign {
 	double sell_price = -1;
 	int quantity = -1;
 	Material item = null;
+	ItemMeta meta = null;
 	ShopSignOwner sso;
 	String[] lines;
 	
@@ -59,10 +62,11 @@ public class ShopSign {
 		buy_price = file.getDouble("buy-price");
 		sell_price = file.getDouble("sell-price");
 		quantity = file.getInt("quantity");
-		String i = file.getString("item");
+		ItemStack i = file.getItemStack("item");
+		type = file.getInt("type");
 		
-		if(i.equals("null")) item = null;
-		else item = Material.getMaterial(i);
+		item = i.getType();
+		meta = i.getItemMeta();
 		
 		isConnected = file.getBoolean("connected");
 		
@@ -125,8 +129,10 @@ public class ShopSign {
 		shop.set("buy-price", buy_price);
 		shop.set("sell-price", sell_price);
 		shop.set("quantity", quantity);
-		if(item != null) shop.set("item", item.toString());
-		else shop.set("item", "null");
+		if(item != null) {
+			shop.set("item", new ItemStack(item));
+		}
+		else shop.set("item", null);
 		shop.set("connected", false);
 		
 		try {
@@ -151,8 +157,8 @@ public class ShopSign {
 			return;
 		}
 		
-		// You can't buy from your own shop, and also if this shop is not a buy sign
-		if(buyer.getBase().getUniqueId().toString().equals(sso.getPlayer().getUniqueId().toString()) || buy_price == -1) {
+		// You can't buy from this shop if it is not a buy sign
+		if(buy_price == -1) {
 			
 			String s = plugin.getConfig().getString("errors.sign-no-buy","&cYou may not buy from that shop.");
 			s = Util.color(s);
@@ -180,9 +186,10 @@ public class ShopSign {
 			boolean b = plugin.getConfig().getBoolean("feedback.mail-owner-shop-empty");
 			if(b) {
 				String f = plugin.getConfig().getString("feedback.mail-message-owner-shop-empty", 
-						"&c[ShopSigns] &eYour chest at &c%ccoords% &elinked to the shop at &c%scoords% &eis empty.");
+						"&c[ShopSigns] &eYour &c%item%&e chest at &c%ccoords% &elinked to the shop at &c%scoords% &eis empty.");
 				f = f.replace("%ccoords%", sc.getLocation().getBlockX()+","+sc.getLocation().getBlockY()+","+sc.getLocation().getBlockZ());
 				f = f.replace("%scoords%", sign.getX()+","+sign.getY()+","+sign.getZ());
+				f = f.replace("%item%", item.toString());
 				f = Util.color(f);
 				sso.sendFeedback(f);
 			}
@@ -191,10 +198,11 @@ public class ShopSign {
 		
 		// Get the amount of space in the player's inventory
 		Inventory pinv = buyer.getBase().getInventory();
-		ItemStack[] contents = pinv.getContents();
+		ItemStack[] contents = pinv.getStorageContents();
 		int space = 0;
-		
-		for(ItemStack is : contents) {
+				
+		for(int in=0; in<contents.length; in++) {
+			ItemStack is = contents[in];
 			if(is == null) {
 				space += item.getMaxStackSize();
 				continue;
@@ -235,12 +243,14 @@ public class ShopSign {
 		
 		while(amount > item.getMaxStackSize()) {
 			ItemStack is = new ItemStack(item, item.getMaxStackSize());
+			is.setItemMeta(meta);
 			amount = amount - item.getMaxStackSize();
 			additems.add(is);
 		}
 		
 		if(amount > 0) {
 			ItemStack is = new ItemStack(item, amount);
+			is.setItemMeta(meta);
 			additems.add(is);
 		}
 		
@@ -280,8 +290,8 @@ public class ShopSign {
 			return;
 		}
 		
-		// You can't sell to your own shop and also if this sign is not a sell sign
-		if(seller.getBase().getUniqueId().toString().equals(sso.getPlayer().getUniqueId().toString()) || sell_price == -1) {
+		// You can't sell to this sign if it is not a sell sign
+		if(sell_price == -1) {
 			
 			String s = plugin.getConfig().getString("errors.sign-no-sell","&cYou may not sell to that shop.");
 			s = Util.color(s);
@@ -311,9 +321,10 @@ public class ShopSign {
 			boolean b = plugin.getConfig().getBoolean("feedback.mail-owner-shop-full");
 			if(b) {
 				String f = plugin.getConfig().getString("feedback.mail-message-owner-shop-full", 
-						"&c[ShopSigns] &eYour chest at &c%ccoords% &elinked to the shop at &c%scoords% &eis full.");
+						"&c[ShopSigns] &eYour &c%item%&e chest at &c%ccoords% &elinked to the shop at &c%scoords% &eis full.");
 				f = f.replace("%ccoords%", sc.getLocation().getBlockX()+","+sc.getLocation().getBlockY()+","+sc.getLocation().getBlockZ());
 				f = f.replace("%scoords%", sign.getX()+","+sign.getY()+","+sign.getZ());
+				f = f.replace("%item%", item.toString());
 				f = Util.color(f);
 				sso.sendFeedback(f);
 			}
@@ -321,9 +332,11 @@ public class ShopSign {
 		}
 		
 		Inventory inv = seller.getBase().getInventory();
+		ItemStack temp = new ItemStack(item);
+		temp.setItemMeta(meta);
 		
 		// If the seller doesn't have the items that would be sold, do not allow them to sell to this shop
-		if(!inv.contains(item, quantity)) {
+		if(!inv.containsAtLeast(temp, quantity)) {
 			
 			String s = plugin.getConfig().getString("errors.sell-no-inventory", "&cYou do not have enough of the item being sold.");
 			s = Util.color(s);
@@ -350,12 +363,14 @@ public class ShopSign {
 		
 		while(amount > item.getMaxStackSize()) {
 			ItemStack is = new ItemStack(item, item.getMaxStackSize());
+			is.setItemMeta(meta);
 			amount = amount - item.getMaxStackSize();
 			additems.add(is);
 		}
 		
 		if(amount > 0) {
 			ItemStack is = new ItemStack(item, amount);
+			is.setItemMeta(meta);
 			additems.add(is);
 		}
 		
@@ -459,7 +474,7 @@ public class ShopSign {
 		
 		if(item == null) {
 			 
-			 Container c = (Container)b;
+			 Container c = (Container)b.getState();
 			 
 			 Inventory inv = c.getInventory();
 			 boolean isEmpty = true;
@@ -488,7 +503,7 @@ public class ShopSign {
 		if(quantity == -1) {
 			 
 			 if(!(b instanceof Container)) return;
-			 Container c = (Container)b;
+			 Container c = (Container)b.getState();
 			 
 			 Inventory inv = c.getInventory();
 			 boolean isEmpty = true;
@@ -497,9 +512,12 @@ public class ShopSign {
 			 ItemStack[] contents = inv.getContents();
 			 
 			 for(ItemStack is : contents) {
+				 
 				 if(is == null) continue;
 				 else if(!is.getType().equals(item) && !isCounting) continue;
 				 else if(is.getType().equals(item)) {
+					 
+					 isEmpty = false;
 					 isCounting = true;
 					 count += is.getAmount();
 				 }
@@ -517,11 +535,30 @@ public class ShopSign {
 			 quantity = count;
 		}
 		
+		//Determine meta information of the inventory contents
+		Container c = (Container)b.getState();
+		Inventory inv = c.getInventory();
+		ItemStack[] contents = inv.getContents();
+		
+		for(ItemStack is : contents) {
+			
+			if(is == null) continue;
+			else if(!is.getType().equals(item)) continue;
+			else if(is.getType().equals(item)) {
+
+				meta = is.getItemMeta();
+				break;
+			}
+		}
+		
 		shop.set("connected", true);
 		shop.set("chest-location.world", location.getWorld().getName());
 		shop.set("chest-location.x", location.getBlockX());
 		shop.set("chest-location.y", location.getBlockY());
 		shop.set("chest-location.z", location.getBlockZ());
+		ItemStack temp = new ItemStack(item);
+		temp.setItemMeta(meta);
+		shop.set("item", temp);
 		
 		try {
 			shop.save(new File(sso.getDataFolder(), getFileName()));
@@ -567,6 +604,7 @@ public class ShopSign {
 	public int getType() {return type;}
 	public int getQuantity() {return quantity;}
 	public Material getItem() {return item;}
+	public ItemMeta getMeta() {return meta;}
 	public double getBuyPrice() {return buy_price;}
 	public double getSellPrice() {return sell_price;}
 	public Sign getSign() {return sign;}

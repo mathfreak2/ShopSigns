@@ -1,7 +1,10 @@
 package cat.math.shopsigns.listeners;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -79,6 +82,19 @@ public class PlayerInteraction implements Listener {
 			if(type < 3) ss = new ShopSign(plugin, shop);
 			else if(type >= 3 && type < 6) ss = new AdminShop(plugin, shop);
 			else ss = new PrivateShop(plugin, shop);
+			
+			Player breaker = event.getPlayer();
+			OfflinePlayer owner = ss.getOwner().getPlayer();
+			
+			if(!breaker.getUniqueId().equals(owner.getUniqueId()) && !breaker.hasPermission("shopsigns.break.other")) {
+				
+				breaker.sendMessage(Util.color("&cThis is not your shop!"));
+				Bukkit.getLogger().log(Level.WARNING, "&c" + breaker.getName()+" is trying to break a shop owned by " + 
+						owner.getName() + " at X: " + ss.getSign().getX() + " Y: " + ss.getSign().getY() + " Z: " + ss.getSign().getZ());
+				event.setCancelled(true);
+				return;
+			}
+			
 			ss.remove(event.getPlayer());
 			break;
 		case CHEST:
@@ -107,6 +123,19 @@ public class PlayerInteraction implements Listener {
 			if(type < 3) ss = new ShopSign(plugin, shop);
 			else if(type >= 3 && type < 6) ss = new AdminShop(plugin, shop);
 			else ss = new PrivateShop(plugin, shop);
+			
+			breaker = event.getPlayer();
+			owner = ss.getOwner().getPlayer();
+			
+			if(!breaker.getUniqueId().equals(owner.getUniqueId()) && !breaker.hasPermission("shopsigns.break.other")) {
+				
+				breaker.sendMessage(Util.color("&cThis is not your shop!"));
+				Bukkit.getLogger().log(Level.WARNING, "&c" + breaker.getName()+" is trying to break a shop chest owned by " + 
+						owner.getName() + " at X: " + ss.getSign().getX() + " Y: " + ss.getSign().getY() + " Z: " + ss.getSign().getZ());
+				event.setCancelled(true);
+				return;
+			}
+			
 			ss.disconnectChest(event.getPlayer());
 			break;
 		default:

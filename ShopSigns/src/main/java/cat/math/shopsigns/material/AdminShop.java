@@ -3,6 +3,7 @@ package cat.math.shopsigns.material;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.Inventory;
@@ -62,10 +63,11 @@ public class AdminShop extends ShopSign {
 		
 		// Get the amount of space in the player's inventory
 		Inventory pinv = buyer.getBase().getInventory();
-		ItemStack[] contents = pinv.getContents();
+		ItemStack[] contents = pinv.getStorageContents();
 		int space = 0;
 				
-		for(ItemStack is : contents) {
+		for(int in=0; in<contents.length; in++) {
+			ItemStack is = contents[in];
 			if(is == null) {
 				space += item.getMaxStackSize();
 				continue;
@@ -93,12 +95,14 @@ public class AdminShop extends ShopSign {
 		
 		while(amount > item.getMaxStackSize()) {
 			ItemStack is = new ItemStack(item, item.getMaxStackSize());
+			is.setItemMeta(meta);
 			amount = amount - item.getMaxStackSize();
 			additems.add(is);
 		}
 		
 		if(amount > 0) {
 			ItemStack is = new ItemStack(item, amount);
+			is.setItemMeta(meta);
 			additems.add(is);
 		}
 		
@@ -156,7 +160,7 @@ public class AdminShop extends ShopSign {
 		}
 		
 		try {
-			seller.giveMoney(new BigDecimal(buy_price));
+			seller.giveMoney(new BigDecimal(sell_price));
 		} catch (Exception e) {
 			String s = plugin.getConfig().getString("errors.too-much-money", "&cThat transaction could not go through because one party has too much money.");
 			s = Util.color(s);
@@ -171,12 +175,14 @@ public class AdminShop extends ShopSign {
 		
 		while(amount > item.getMaxStackSize()) {
 			ItemStack is = new ItemStack(item, item.getMaxStackSize());
+			is.setItemMeta(meta);
 			amount = amount - item.getMaxStackSize();
 			additems.add(is);
 		}
 		
 		if(amount > 0) {
 			ItemStack is = new ItemStack(item, amount);
+			is.setItemMeta(meta);
 			additems.add(is);
 		}
 		
